@@ -9,20 +9,23 @@ import java.io.Serializable;
 @Slf4j
 @Data
 @Entity
-@Table(name = "goods")
+@Table(name = "products")
 public class Product implements Serializable{
     @Id
     @GeneratedValue
     private long id;
 
+    @Column(name = "cost")
+    private long cost;
+
     @Column(name = "name")
     private String name;
 
-    @Column(name = "cost")
-    private int cost;
-
     @Column(name = "description")
     private String description;
+
+    @Column(name = "type")
+    private String type;
 
     @Column(name = "image")
     private String image;
@@ -31,11 +34,11 @@ public class Product implements Serializable{
 
     }
 
-    public Product(int cost, String name, String description, String image) {
+    public Product(long cost, String name, String description, String type, String image) {
         this.name = name;
         this.cost = cost;
         this.description = description;
+        this.type = type;
         this.image = image;
     }
-
 }
