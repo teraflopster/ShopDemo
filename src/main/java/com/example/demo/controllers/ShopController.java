@@ -14,11 +14,11 @@ public interface ShopController {
     @GetMapping("/get/all")
     List<Product> findAllProducts();
 
-    @GetMapping("/get/by/id")
-    Product findProductById();
+    @GetMapping("/get/by/id/{id}")
+    Product findProductById(@PathVariable int id);
 
-    @GetMapping("/get/by/type")
-    List<Product> findProductByType();
+    @GetMapping("/get/by/type/{type}")
+    List<Product> findProductByType(@PathVariable String type);
 
     @PostMapping("/add/product")
     Product save(@RequestParam MultipartFile file, @RequestParam String name,
