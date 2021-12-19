@@ -7,23 +7,24 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
-@RequestMapping("/products")
+@RequestMapping("/api")
 public interface ShopController {
-    @GetMapping("/get/all")
+    @GetMapping(    "/product")
     List<Product> findAllProducts();
 
-    @GetMapping("/get/by/id/{id}")
-    Product findProductById(@PathVariable int id);
+    @GetMapping("/product/{id}")
+    Optional<Product> findProductById(@PathVariable int id);
 
-    @GetMapping("/get/by/type/{type}")
+    @GetMapping("/product/type/{type}")
     List<Product> findProductByType(@PathVariable String type);
 
-    @PostMapping("/add/product")
-    Product save(@RequestParam MultipartFile file, @RequestParam String name,
-                 @RequestParam int cost, @RequestParam String desc) throws IOException, NoSuchAlgorithmException;
+    @PostMapping("/product")
+    Product save(@RequestParam MultipartFile image, @RequestParam String name, @RequestParam String type
+                ,@RequestParam String desc,  @RequestParam long cost) throws IOException, NoSuchAlgorithmException;
 
-    @DeleteMapping("/delete/by/id")
-    void deleteProductById();
+    @DeleteMapping("/product/")
+    void deleteProduct(@RequestBody Product product);
 }
