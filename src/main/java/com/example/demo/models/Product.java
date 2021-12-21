@@ -15,8 +15,8 @@ public class Product implements Serializable{
     @GeneratedValue
     private long id;
 
-    @Column(name = "cost")
-    private long cost;
+    @Column(name = "image")
+    private String image;
 
     @Column(name = "name")
     private String name;
@@ -27,18 +27,18 @@ public class Product implements Serializable{
     @Column(name = "type")
     private String type;
 
-    @Column(name = "image")
-    private String image;
 
+    @Column(name = "cost")
+    private long cost;
     public Product() {
 
     }
 
-    public Product(long cost, String name, String description, String type, String image) {
-        this.name = name;
-        this.cost = cost;
-        this.description = description;
-        this.type = type;
+    public Product(String image, String name, String type, String description, long cost) {
         this.image = image;
+        this.name = name;
+        this.type = type;
+        this.description = description;
+        this.cost = cost;
     }
 }
