@@ -13,7 +13,7 @@ import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
 @Service
-public class MinioServiceImpl {
+public class MinioServiceImpl implements MinioService{
 
     @Resource
     private MinioClient minioClient;
@@ -43,12 +43,11 @@ public class MinioServiceImpl {
 
     public String getUrl(String path) {
         try {
-            String url = minioClient.getPresignedObjectUrl(GetPresignedObjectUrlArgs.builder()
+            return minioClient.getPresignedObjectUrl(GetPresignedObjectUrlArgs.builder()
                     .bucket(TEST_BUCKET)
                     .object(path).
                     method(Method.GET)
                     .expiry(7, TimeUnit.DAYS).build());
-            return url;
         } catch (Exception e) {
             e.printStackTrace();
             return "";

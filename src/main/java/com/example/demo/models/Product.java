@@ -12,7 +12,7 @@ import java.io.Serializable;
 @Table(name = "products")
 public class Product implements Serializable {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @Column(name = "image")

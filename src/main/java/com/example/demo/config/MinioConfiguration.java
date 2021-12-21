@@ -9,9 +9,9 @@ public class MinioConfiguration {
 
     private static final String END_POINT = "http://localhost:9000";
 
-    private static final String USERNAME = "admin";
+    private static final String USERNAME = "minioadmin";
 
-    private static final String PASSWORD = "password";
+    private static final String PASSWORD = "minioadmin";
 
     @Bean
     public MinioClient minioClient() {
