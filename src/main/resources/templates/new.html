@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1 th:text="${some}"></h1>
+    <form action="/api/product" method="post" enctype="multipart/form-data">
+        <label class="form-new-product">
+         <input type="file" name="image"><br>
+        </label>
+        <label class="form-new-product">
+            <input type="text" name="name">
+        </label><br>
+        <label class="form-new-product">
+            <input type="text" name="type">
+        </label><br>
+        <label class="form-new-product">
+            <input type="text" name="desc">
+        </label><br>
+        <label class="form-new-product">
+            <input type="text" name="cost">
+        </label><br>
+        <label class="form-new-product">
+            <input type="submit">
+        </label><br>
+    </form>
+</body>
+</html>
