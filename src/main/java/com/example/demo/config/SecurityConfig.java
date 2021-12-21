@@ -21,10 +21,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .csrf().disable()
-
                 .authorizeRequests()
-                .antMatchers("/").permitAll()
-                .antMatchers(HttpMethod.GET, "/api/product/**").permitAll()
+                .antMatchers("/*").permitAll()
+                .antMatchers(HttpMethod.GET, "/api/product/").permitAll()
+                .antMatchers(HttpMethod.GET, "/api/product/new/").hasRole(Role.ADMIN.name())
                 .antMatchers(HttpMethod.POST, "/api/product/**").hasRole(Role.ADMIN.name())
                 .antMatchers(HttpMethod.DELETE, "/api/product/**").hasRole(Role.ADMIN.name())
                 .anyRequest()
@@ -41,11 +41,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         .username("admin")
                         .password(passwordEncoder().encode("admin"))
                         .roles("ADMIN")
-                        .build(),
-                User.builder()
-                        .username("user")
-                        .password(passwordEncoder().encode("user"))
-                        .roles("USER")
                         .build()
         );
     }

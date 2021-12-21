@@ -10,7 +10,7 @@ import java.io.Serializable;
 @Data
 @Entity
 @Table(name = "products")
-public class Product implements Serializable{
+public class Product implements Serializable {
     @Id
     @GeneratedValue
     private long id;
@@ -40,5 +40,9 @@ public class Product implements Serializable{
         this.type = type;
         this.description = description;
         this.cost = cost;
+    }
+
+    public long getId() {
+        return id;
     }
 }
