@@ -69,7 +69,7 @@ a {
 
 a {
     color: #79dfff;
-    font-family: Alef;
+    font-family: Alef, serif;
     font-size: 24px;
     font-weight: 700;
 }
@@ -111,7 +111,7 @@ a {
 
 .product-title {
     font-size: 44px;
-    font-family: Amiri;
+    font-family: Amiri, serif;
     color: cornflowerblue;
 }
 
@@ -121,10 +121,7 @@ a {
 }
 
 .product-text {
-    margin-top: 20px;
-    margin-bottom: 20px;
-    margin-left: 0px;
-    margin-right: 20px;
+    margin: 20px 20px 20px 0;
 }
 
 .cost {
