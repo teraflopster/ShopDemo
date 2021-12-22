@@ -26,7 +26,6 @@ public class MinioServiceImpl {
             String suffix = file.getOriginalFilename().substring(idx + 1);
             String fileName = UUID.randomUUID() + "." + suffix;
 
-            // Save file
             minioClient.putObject(PutObjectArgs.builder()
                     .stream(file.getInputStream(), file.getSize(), PutObjectArgs.MIN_MULTIPART_SIZE)
                     .object(fileName)
@@ -43,12 +42,11 @@ public class MinioServiceImpl {
 
     public String getUrl(String path) {
         try {
-            String url = minioClient.getPresignedObjectUrl(GetPresignedObjectUrlArgs.builder()
+            return minioClient.getPresignedObjectUrl(GetPresignedObjectUrlArgs.builder()
                     .bucket(TEST_BUCKET)
                     .object(path).
                     method(Method.GET)
                     .expiry(7, TimeUnit.DAYS).build());
-            return url;
         } catch (Exception e) {
             e.printStackTrace();
             return "";
