@@ -3,11 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../static/css/style.css">
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
 </head>
 <body>
     <h1 th:text="${some}"></h1>
-    <form action="/api/product" method="post" enctype="multipart/form-data">
+    <form action="/api/product/" method="post" enctype="multipart/form-data">
         <label class="form-new-product">
          <input type="file" name="image"><br>
         </label>

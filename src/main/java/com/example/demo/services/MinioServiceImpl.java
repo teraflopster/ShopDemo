@@ -26,7 +26,6 @@ public class MinioServiceImpl implements MinioService{
             String suffix = file.getOriginalFilename().substring(idx + 1);
             String fileName = UUID.randomUUID() + "." + suffix;
 
-            // Save file
             minioClient.putObject(PutObjectArgs.builder()
                     .stream(file.getInputStream(), file.getSize(), PutObjectArgs.MIN_MULTIPART_SIZE)
                     .object(fileName)
