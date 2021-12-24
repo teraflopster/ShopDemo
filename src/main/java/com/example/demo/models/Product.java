@@ -11,9 +11,10 @@ import java.io.Serializable;
 @Entity
 @Table(name = "products")
 public class Product implements Serializable {
+  
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @Column(name = "image")
