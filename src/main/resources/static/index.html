@@ -5,8 +5,8 @@
     <title>Title</title>
 </head>
 <body>
-    <div th:each="product : ${products}">
-        <p th:text="${product.getName()}"></p>
-    </div>
+    <form action="/api/logout" method="post">
+        <input type="submit" placeholder="logout">
+    </form>
 </body>
 </html>
