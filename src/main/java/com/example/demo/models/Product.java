@@ -13,6 +13,7 @@ import java.io.Serializable;
 public class Product implements Serializable {
     @Id
     @GeneratedValue
+    @Column(name = "id")
     private long id;
 
     @Column(name = "image")
@@ -27,9 +28,9 @@ public class Product implements Serializable {
     @Column(name = "type")
     private String type;
 
-
     @Column(name = "cost")
     private long cost;
+
     public Product() {
 
     }
@@ -40,9 +41,5 @@ public class Product implements Serializable {
         this.type = type;
         this.description = description;
         this.cost = cost;
-    }
-
-    public long getId() {
-        return id;
     }
 }
