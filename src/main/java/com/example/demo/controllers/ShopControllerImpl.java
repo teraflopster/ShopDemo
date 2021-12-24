@@ -18,7 +18,7 @@ import java.util.Optional;
 
 @Slf4j
 @Controller
-public class ShopControllerImpl implements ShopController{
+public class ShopControllerImpl implements ShopController {
 
     private final ProductServiceImpl productService;
 
@@ -83,5 +83,10 @@ public class ShopControllerImpl implements ShopController{
     @Override
     public void deleteProduct(@RequestBody Product product) {
         productService.deleteProduct(product);
+    }
+
+    @Override
+    public String getLoginPage() {
+        return "/login";
     }
 }

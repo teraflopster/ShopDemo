@@ -11,7 +11,9 @@ import java.io.Serializable;
 @Entity
 @Table(name = "products")
 public class Product implements Serializable {
+  
     @Id
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
@@ -27,9 +29,9 @@ public class Product implements Serializable {
     @Column(name = "type")
     private String type;
 
-
     @Column(name = "cost")
     private long cost;
+
     public Product() {
 
     }
@@ -40,9 +42,5 @@ public class Product implements Serializable {
         this.type = type;
         this.description = description;
         this.cost = cost;
-    }
-
-    public long getId() {
-        return id;
     }
 }
