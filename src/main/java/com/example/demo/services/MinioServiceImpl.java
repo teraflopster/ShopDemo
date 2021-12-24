@@ -13,7 +13,7 @@ import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
 @Service
-public class MinioServiceImpl {
+public class MinioServiceImpl implements MinioService{
 
     @Resource
     private MinioClient minioClient;
