@@ -14,11 +14,11 @@ public interface ProductService {
 
     Optional<Product> findProduct(long id);
 
-    List<Product> findStudentsByType(String type);
+    List<Product> findProductByType(String type);
 
-    List<Product> findAllStudentByName(String name);
+    List<Product> findAllProductByName(String name);
 
-    List<Product> findAllStudentByCost(long cost);
+    List<Product> findAllProductByCost(long cost);
 
     void updateProduct(Product product, long id);
 
