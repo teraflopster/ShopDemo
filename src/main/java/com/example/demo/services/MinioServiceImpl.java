@@ -4,6 +4,7 @@ import io.minio.GetPresignedObjectUrlArgs;
 import io.minio.MinioClient;
 import io.minio.PutObjectArgs;
 import io.minio.http.Method;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -18,7 +19,8 @@ public class MinioServiceImpl implements MinioService{
     @Resource
     private MinioClient minioClient;
 
-    private static final String TEST_BUCKET = "shop";
+    @Value("${spring.minio.bucket}")
+    private String bucket;
 
     public String saveImage(MultipartFile file) {
         try {
@@ -30,7 +32,7 @@ public class MinioServiceImpl implements MinioService{
                     .stream(file.getInputStream(), file.getSize(), PutObjectArgs.MIN_MULTIPART_SIZE)
                     .object(fileName)
                     .contentType(file.getContentType())
-                    .bucket(TEST_BUCKET)
+                    .bucket(bucket)
                     .build());
             return fileName;
         } catch (Exception e) {
@@ -43,7 +45,7 @@ public class MinioServiceImpl implements MinioService{
     public String getUrl(String path) {
         try {
             return minioClient.getPresignedObjectUrl(GetPresignedObjectUrlArgs.builder()
-                    .bucket(TEST_BUCKET)
+                    .bucket(bucket)
                     .object(path).
                     method(Method.GET)
                     .expiry(7, TimeUnit.DAYS).build());

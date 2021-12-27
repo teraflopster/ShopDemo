@@ -1,23 +1,26 @@
 package com.example.demo.config;
 
 import io.minio.MinioClient;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class MinioConfiguration {
+    @Value("${spring.minio.url}")
+    private String end_point;
 
-    private static final String END_POINT = "http://localhost:9000";
+    @Value("${spring.minio.access-key}")
+    private String username;
 
-    private static final String USERNAME = "minioadmin";
-
-    private static final String PASSWORD = "minioadmin";
+    @Value("${spring.minio.secret-key}")
+    private String password;
 
     @Bean
     public MinioClient minioClient() {
         return new MinioClient.Builder()
-                .endpoint(END_POINT)
-                .credentials(USERNAME, PASSWORD)
+                .endpoint(end_point)
+                .credentials(username, password)
                 .build();
     }
 }
