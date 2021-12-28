@@ -1,6 +1,7 @@
 package com.example.demo.controllers;
 
 import com.example.demo.models.Product;
+import com.example.demo.models.User;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -38,4 +39,14 @@ public interface ShopController {
 
     @GetMapping("/login")
     String getLoginPage();
+
+    @PostMapping("/new/user")
+    String saveNewUser(@RequestBody User user);
+
+    @GetMapping("/admin")
+    @PreAuthorize("hasAuthority('admin:read')")
+    String getAdminPage(Model model);
+
+    @GetMapping("/registration")
+    String getRegistration();
 }

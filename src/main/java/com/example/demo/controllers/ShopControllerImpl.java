@@ -1,12 +1,15 @@
 package com.example.demo.controllers;
 
-import com.example.demo.models.Comment;
-import com.example.demo.models.Product;
+import com.example.demo.models.*;
 import com.example.demo.services.CommentServiceImpl;
 import com.example.demo.services.MinioServiceImpl;
 import com.example.demo.services.ProductServiceImpl;
+import com.example.demo.services.UserServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,14 +29,16 @@ public class ShopControllerImpl implements ShopController {
 
     private final MinioServiceImpl minioService;
 
+    private final UserServiceImpl userService;
+
     @Autowired
-    ShopControllerImpl(ProductServiceImpl productService, CommentServiceImpl commentService, MinioServiceImpl minioService) {
+    ShopControllerImpl(ProductServiceImpl productService, CommentServiceImpl commentService,
+                       MinioServiceImpl minioService, UserServiceImpl userService) {
         this.productService = productService;
         this.commentService = commentService;
         this.minioService = minioService;
+        this.userService = userService;
     }
-
-
 
     @Override
     public String findAllProducts(Model model) {
@@ -63,7 +68,7 @@ public class ShopControllerImpl implements ShopController {
 
     @Override
     public String findProductByType(@PathVariable String type, Model model) {
-        List<Product> products = productService.findStudentsByType(type);
+        List<Product> products = productService.findProductByType(type);
         for (Product product : products) {
             product.setImage(minioService.getUrl(product.getImage()));
         }
@@ -71,8 +76,6 @@ public class ShopControllerImpl implements ShopController {
         return "/products";
     }
 
-
-    /* POST /product */
     @Override
     public String save(MultipartFile image, String name, String type, String desc, long cost) {
         Product product = new Product(minioService.saveImage(image), name, type,desc,cost);
@@ -89,4 +92,33 @@ public class ShopControllerImpl implements ShopController {
     public String getLoginPage() {
         return "/login";
     }
+
+
+    // /api/new/user
+    @Override
+    public String saveNewUser(@RequestBody User user) {
+        if (userService.getUserByEmail(user.getEmail()).isEmpty()) {
+            user.setRole(Role.USER);
+            user.setStatus(Status.ACTIVE);
+            user.setPassword(passwordEncoder().encode(user.getPassword()));
+            userService.saveUser(user);
+            log.info("User saves: {}", user);
+        } else {
+            log.info("User not saves: {}, email is in use by another user!", user);
+        }
+        return "redirect:/";
+    }
+
+    @Override
+    public String getAdminPage(Model model){
+        model.addAttribute("users", userService.getAllUser());
+        return "/admin";
+    }
+
+    @Override
+    public String getRegistration() {
+        return "/registration";
+    }
+
+    private PasswordEncoder passwordEncoder( ) {return new BCryptPasswordEncoder(12);}
 }
