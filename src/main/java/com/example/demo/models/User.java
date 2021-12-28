@@ -33,21 +33,15 @@ public class User {
 
     public User(){}
 
-    public User(String email, String firstName, String lastName, String password, Role role, Status status) {
+    public User(String email, String firstName, String lastName, String password) {
         this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.password = passwordEncoder().encode(password);
-        this.role = role;
-        this.status = status;
+        this.password = password;
     }
 
     public String getPassword() {
         return password;
-    }
-
-    protected PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder(12);
     }
 
     public String getEmail() {
@@ -88,5 +82,21 @@ public class User {
 
     public void setStatus(Status status) {
         this.status = status;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "email='" + email + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", password='" + password + '\'' +
+                ", role=" + role +
+                ", status=" + status +
+                '}';
     }
 }
