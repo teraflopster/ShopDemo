@@ -38,4 +38,14 @@ public interface ShopController {
 
     @GetMapping("/login")
     String getLoginPage();
+
+    @PostMapping("/new/user")
+    String saveNewUser(@RequestBody User user);
+
+    @GetMapping("/admin")
+    @PreAuthorize("hasAuthority('admin:read')")
+    String getAdminPage(Model model);
+
+    @GetMapping("/registration")
+    String getRegistration();
 }
